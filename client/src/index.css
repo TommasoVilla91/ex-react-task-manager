@@ -1,0 +1,30 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+a {
+    text-decoration: none;
+}
+
+.container {
+    max-width: 80%;
+}
+
+/* HEADER */
+.navbar {
+    display: flex;
+    gap: 4rem;
+    padding: 1rem 2rem;
+    background-color: bisque;
+}
+
+.navlink {
+    color: black;
+}
+
+.active {
+    color: brown;
+}
