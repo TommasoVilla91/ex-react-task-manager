@@ -3,9 +3,9 @@ import NavBar from "./NavBar";
 function AppHeader() {
 
     return (
-        <heeader>
+        <header>
             <NavBar />
-        </heeader>
+        </header>
     );
 };
 
