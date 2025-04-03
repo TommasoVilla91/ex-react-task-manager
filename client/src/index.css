@@ -10,7 +10,12 @@ a {
 }
 
 .container {
-    max-width: 80%;
+    min-width: 80%;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
 }
 
 /* HEADER */
@@ -27,4 +32,23 @@ a {
 
 .active {
     color: brown;
+}
+
+/* TABLE */
+table {
+    text-align: center;
+    width: 100%;
+    padding-top: 2rem;
+}
+
+th {
+    padding: 1rem 0.5rem;
+    border: 1px solid rgb(192, 192, 192);
+    background-color: lightcyan;
+}
+
+td {
+    padding: 0.5rem 0.3rem;
+    border: 1px solid rgb(192, 192, 192);
+    background-color: rgb(240, 247, 248);
 }

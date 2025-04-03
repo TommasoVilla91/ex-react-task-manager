@@ -18,7 +18,7 @@ function GlobalProvider({ children }) {
     };
 
     useEffect(() => {
-        console.log(getTasks());
+        getTasks();
     }, []);
     
     const providerValue = {
