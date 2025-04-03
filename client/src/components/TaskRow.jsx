@@ -13,7 +13,7 @@ function TaskRow({t}) {
                     }}>
                         {t.status}
                     </td>
-                    <td>{t.createdAt}</td>
+                    <td>{new Date(t.createdAt).toLocaleDateString('it-IT', { day: '2-digit', month: '2-digit', year: 'numeric' })}</td>
                 </tr>
             </tbody>
         </>
