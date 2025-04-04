@@ -52,3 +52,72 @@ td {
     border: 1px solid rgb(192, 192, 192);
     background-color: rgb(240, 247, 248);
 }
+
+/* FORM */
+.add-task {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 2rem 0;
+}
+
+.add-task h2 {
+    text-align: center;
+    padding-bottom: 1rem;
+}
+
+form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+    padding: 2rem 2rem;
+}
+
+label {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+label h4 {
+    padding-bottom: 0.5rem;
+    font-size: 1.2rem;
+}
+
+input, select, textarea {
+    width: 80%;
+}
+
+input {
+    padding: 0.5rem;
+    border: 1px solid rgb(192, 192, 192);
+    border-radius: 0.5rem;
+}
+
+textarea {
+    padding: 0.5rem;
+    height: 8rem;
+    border: 1px solid rgb(192, 192, 192);
+    border-radius: 0.5rem;
+    resize: none;
+}
+
+select {
+    padding: 0.5rem;
+    border: 1px solid rgb(192, 192, 192);
+    border-radius: 0.5rem;
+}
+
+button[type="submit"] {
+    width: 10%;
+    padding: 0.5rem;
+    border: none;
+    border-radius: 0.5rem;
+    background-color: blue;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
