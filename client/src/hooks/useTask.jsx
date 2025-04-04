@@ -15,7 +15,25 @@ function useTask() {
     };
 
     const addTask = async(newTask) => {
-    
+        const options = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(newTask)
+        };
+        try {
+            const response = await fetch(`${api}/tasks`, options);
+            const obj = await response.json();
+            console.log(obj);
+            if (obj.success === true) {
+                setTasks([...tasks, obj.task]);
+            } else {
+                throw new Error("Qualcosa è andato storto!");
+            }
+        } catch(err) {
+            console.error(err);
+        };
     };
 
     const updateTask = async(id, updatedTask) => {

@@ -12,7 +12,11 @@ function GlobalProvider({ children }) {
     }, []);
 
     const providerValue = {
-        tasks
+        tasks,
+        addTask,
+        updateTask,
+        removeTask,
+        getTasks
     };
 
     return <GlobalContext.Provider value={providerValue}>{children}</GlobalContext.Provider>

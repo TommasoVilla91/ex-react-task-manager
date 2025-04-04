@@ -1,9 +1,11 @@
 import { useMemo, useRef, useState } from "react";
+import { useGlobalContext } from "../context/GlobalContext";
 
 function AddTask() {
     const [title, setTitle] = useState('');
     const descriptionRef = useRef();
     const statusRef = useRef("To do");
+    const { addTask } = useGlobalContext();
 
     const symbols = "!@#$%^&*()-_=+[]{}|;:'\\,.<>?/`~";
 
@@ -16,13 +18,13 @@ function AddTask() {
         e.preventDefault();
         if(!title || !descriptionRef || !statusRef) {
             alert("Compila tutti i campi!");         
-        } else {
+        } else {            
             const task = {
-                titolo: `${title}`,
-                descrizione: `${descriptionRef.current.value}`,
-                stato: `${statusRef.current.value}`
+                title: `${title}`,
+                description: `${descriptionRef.current.value}`,
+                status: `${statusRef.current.value}`
             };
-            console.log(task);
+            addTask(task);
         };
     };
 
@@ -63,7 +65,7 @@ function AddTask() {
                     </label>
 
                     <div>
-                        <button type="Submit">Salva</button>
+                        <button type="Submit">Aggiungi task</button>
                     </div>
 
                 </form>
