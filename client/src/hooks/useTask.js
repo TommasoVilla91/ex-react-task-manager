@@ -44,9 +44,25 @@ function useTask() {
     };
 
     // REMOVE TASK
-    const removeTask = async(id) => {
-
-    };
+    const removeTask = useCallback(async(id) => {
+        const options = {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        };
+        try{
+            const res = await fetch(`${api}/tasks/${id}`, options);
+            const obj = await res.json();
+            if (obj.success === true) {
+                setTasks(tasks.filter(task => task.id !== id));
+            } else {
+                throw new Error("Qualcosa è andato storto!");
+            }
+        } catch(err) {
+            console.error(err);
+        };
+    }, [api, setTasks]);
 
     return { getTasks, addTask, updateTask, removeTask, tasks }; 
 };
