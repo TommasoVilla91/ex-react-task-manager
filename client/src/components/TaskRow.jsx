@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function TaskRow({t}) {
 
@@ -6,7 +7,7 @@ function TaskRow({t}) {
         <>
             <tbody>
                 <tr key={t.id}>
-                    <td>{t.title}</td>
+                    <td><Link to={`/tasks/${t.id}`}>{t.title}</Link></td>
                     <td style={{
                         backgroundColor: t.status === "To do" ? "red" :
                             t.status === "Doing" ? "yellow" : "green"

@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
 function useTask() {
     const [tasks, setTasks] = useState([]);
     const api = import.meta.env.VITE_API_URL;
 
-    const getTasks = async() => {
+    // GET TASKS
+    const getTasks = useCallback(async() => {
         try {
             const response = await fetch(`${api}/tasks`);
             const obj = await response.json();
@@ -12,9 +13,10 @@ function useTask() {
         } catch(err) {
             console.error(err);
         };
-    };
+    }, [api]);
 
-    const addTask = async(newTask) => {
+    // ADD TASK
+    const addTask = useCallback(async(newTask) => {
         const options = {
             method: "POST",
             headers: {
@@ -34,12 +36,14 @@ function useTask() {
         } catch(err) {
             console.error(err);
         };
-    };
+    }, [api, tasks]); 
 
+    // UPDATE TASK
     const updateTask = async(id, updatedTask) => {
 
     };
 
+    // REMOVE TASK
     const removeTask = async(id) => {
 
     };
