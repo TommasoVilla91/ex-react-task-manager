@@ -39,9 +39,26 @@ function useTask() {
     }, [api, tasks]); 
 
     // UPDATE TASK
-    const updateTask = async(id, updatedTask) => {
-
-    };
+    const updateTask = useCallback(async(id, updatedTask) => {
+        const options ={
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(updatedTask)
+        };
+        try {
+            const res = await fetch(`${api}/tasks/${id}`, options);
+            const obj = await res.json();
+            if(obj.success === true) {
+                setTasks(tasks.map(task => task.id === id ? {...task, ...updatedTask} : task));
+            } else {
+                throw new Error("Qualcosa è andato storto!");
+            }
+        } catch(err) {
+            console.error(err);
+        }
+    }, [api, tasks]);
 
     // REMOVE TASK
     const removeTask = useCallback(async(id) => {

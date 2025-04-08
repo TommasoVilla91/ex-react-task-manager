@@ -7,7 +7,7 @@ function Modal({title, content, show, onClose, onConfirm, confirmText}) {
         <div className="modal-overlay">
             <div className="modal-content">
                 <h2>{title}</h2>
-                <p>{content}</p>
+                <div>{content}</div>
                 <div className="modal-bnts">
                     <button className="confirm-delete" onClick={onConfirm}>{confirmText}</button>
                     <button className="close" onClick={onClose}>Chiudi</button>

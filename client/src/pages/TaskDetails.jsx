@@ -1,13 +1,15 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useGlobalContext } from "../context/GlobalContext";
-import Modal from "../components/Modal";
 import { useCallback, useState } from "react";
+import Modal from "../components/Modal";
+import EditTaskModal from "../components/EditTaskModal";
 
 function TaskDetails() {
 
   const { id } = useParams();
-  const { tasks, removeTask } = useGlobalContext();
+  const { tasks, removeTask, updateTask } = useGlobalContext();
   const [show, setShow] = useState(false);
+  const [showEdit, setShowEdit] = useState(false);
   const navigate = useNavigate();
 
   const singleTask = tasks.find(task => task.id === parseInt(id));
@@ -23,6 +25,16 @@ function TaskDetails() {
     };
   }, [removeTask, singleTask, navigate]);
 
+  const handleUpdateTask = useCallback((task) => {
+    updateTask(task.id, task);
+    if(singleTask) {
+      alert("Task aggiornato con successo!");
+      setShow(false);
+    } else {
+      alert("Task non trovato!");
+    };
+  }, [updateTask, singleTask]);
+
   return (
     <div>
       <h1 className="details-page-title">Task Details</h1>
@@ -35,8 +47,9 @@ function TaskDetails() {
               <p><strong>Stato: </strong>{singleTask.status}</p>
               <p><strong>Creato il: </strong>{new Date(singleTask.createdAt).toLocaleDateString('it-IT', { day: '2-digit', month: '2-digit', year: 'numeric' })}</p>
             </div>
-            <div>
+            <div className="card-footer">
               <button className="delete" onClick={() => setShow(true)}>Elimina task</button>
+              <button className="modify" onClick={() => setShowEdit(true)}>Modifica task</button>
             </div>
           </div>
         </div>
@@ -50,6 +63,13 @@ function TaskDetails() {
           onClose={() => {setShow(false)}}
           onConfirm={() => {handleRemoveTask(singleTask.id)}}
           confirmText="Conferma"
+        />
+
+        <EditTaskModal 
+          showEdit={showEdit}
+          onClose={() => {setShowEdit(false)}}
+          task={singleTask}
+          onSave={(task) => {handleUpdateTask(task)}}
         />
       </section>
     </div>
