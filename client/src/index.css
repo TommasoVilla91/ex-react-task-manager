@@ -47,6 +47,11 @@ th {
     background-color: lightcyan;
 }
 
+th:hover {
+    background-color: rgb(184, 241, 249);
+    cursor: pointer;
+}
+
 td {
     padding: 0.5rem 0.3rem;
     border: 1px solid rgb(192, 192, 192);
