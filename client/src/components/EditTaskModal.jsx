@@ -10,12 +10,10 @@ function EditTaskModal({showEdit, onClose, task, onSave}) {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        const value = event.target.value;
-        const name = event.target.name; 
-        const newData = {...task, [name]: value};
+        const newData = {...task, title, description, status};
         onSave(newData);
         onClose();
-    }
+    };
 
     return (
         <Modal

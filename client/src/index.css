@@ -35,6 +35,13 @@ a {
 }
 
 /* TABLE */
+.search-area {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+
 table {
     text-align: center;
     width: 100%;
