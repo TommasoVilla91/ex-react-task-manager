@@ -1,6 +1,6 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useGlobalContext } from "../context/GlobalContext";
-import { useCallback, useState } from "react";
+import { useState } from "react";
 import Modal from "../components/Modal";
 import EditTaskModal from "../components/EditTaskModal";
 
@@ -14,26 +14,32 @@ function TaskDetails() {
 
   const singleTask = tasks.find(task => task.id === parseInt(id));
 
-  const handleRemoveTask = useCallback((id) => {
-    removeTask(id);
-    if(singleTask) {
-      alert("Task eliminato con successo!");
-      setShow(false);
-      navigate("/");
-    } else {
+  const handleRemoveTask = async (id) => {
+    try {
+      await removeTask(id);
+      if(singleTask) {
+        alert("Task eliminato con successo!");
+        setShow(false);
+        navigate("/");
+      }
+    } catch(error) {
+      console.error(error);
       alert("Task non trovato!");
     };
-  }, [removeTask, singleTask, navigate]);
+  };
 
-  const handleUpdateTask = useCallback((task) => {
-    updateTask(task.id, task);
-    if(singleTask) {
-      alert("Task aggiornato con successo!");
-      setShow(false);
-    } else {
+  const handleUpdateTask = async (task) => {
+    try {
+      await updateTask(task.id, task);
+      if(singleTask) {
+        alert("Task aggiornato con successo!");
+        setShow(false);
+      } 
+    } catch(error) {
+      console.error(error);
       alert("Task non trovato!");
     };
-  }, [updateTask, singleTask]);
+  };
 
   return (
     <div>

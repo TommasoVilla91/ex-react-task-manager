@@ -14,7 +14,7 @@ function AddTask() {
         return charValid;
     }, [title]);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async(e) => {
         e.preventDefault();
         if(!title || !descriptionRef || !statusRef) {
             alert("Compila tutti i campi!");         
@@ -24,7 +24,16 @@ function AddTask() {
                 description: `${descriptionRef.current.value}`,
                 status: `${statusRef.current.value}`
             };
-            addTask(task);
+            try {
+                await addTask(task);
+                alert("Task aggiunto con successo!");
+                setTitle('');
+                descriptionRef.current.value = '';
+                statusRef.current.value = 'To do';
+            } catch(error) {
+                console.error(error);
+                alert("Task non trovato!");
+            }
         };
     };
 

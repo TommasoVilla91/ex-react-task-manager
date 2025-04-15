@@ -1,12 +1,19 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function TaskRow({t}) {
+function TaskRow({t, checked, onToggle}) {
 
     return (
         <>
             <tbody>
-                <tr key={t.id}>
+                <tr>
+                    <td>
+                        <input 
+                            type="checkbox"
+                            checked={checked}
+                            onChange={() => onToggle(t.id)}
+                        />
+                    </td>
                     <td><Link to={`/tasks/${t.id}`}>{t.title}</Link></td>
                     <td style={{
                         backgroundColor: t.status === "To do" ? "red" :
