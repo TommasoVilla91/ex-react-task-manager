@@ -1,4 +1,4 @@
-import { useMemo, useState, useCallback, useRef } from "react";
+import { useMemo, useState, useCallback } from "react";
 import TaskRow from "../components/TaskRow";
 import { useGlobalContext } from "../context/GlobalContext";
 
@@ -20,10 +20,10 @@ function TaskList() {
         };
     };
 
-    // ora uso lo stato per la ricerca e associo il valore di queryRef.current.value a searchQuery
+    // associo il valore immesso nell'input allo stato della ricerca
     const handleSearch = useCallback(
         debounce(setSearchQuery, 500)
-        // array vuoto perchè non voglio che venga eseguita solo una volta
+    // array vuoto perchè venga eseguita solo una volta
     , []);
 
     // imposta l'ordine di ordinamento in base alla colonna
@@ -61,13 +61,15 @@ function TaskList() {
         } else {
             return [...filteredTasks].sort((a, b) => sortOrder * (new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()));
         };
-    // alle diepndenze aggiungo anche searchQuery perchè se cambia il valore queryRef a cui è associato, viene eseguita la funzione
     }, [tasks, sortBy, sortOrder, searchQuery]);
 
     const handleToggleSelection = (taskId) => {
+        // se l'array delle task selez include l'id della task che ho selezionato
         if(selectedTasks.includes(taskId)) {
+            // imposto un array che non abbia id uguali
             setSelectedTasks(prev => prev.filter(id => id !== taskId));
         } else {
+            // sennò imposto l'array precedente con l'aggiunta del nuovo id
             setSelectedTasks(prev => [...prev, taskId]);
         };
     };
