@@ -20,10 +20,11 @@ function TaskList() {
         };
     };
 
+    // uso useCallback perché l'istruzione di debounce è sempre quella 
     // associo il valore immesso nell'input allo stato della ricerca
     const handleSearch = useCallback(
         debounce(setSearchQuery, 500)
-    // array vuoto perchè venga eseguita solo una volta
+    // array vuoto perchè venga eseguita solo una volta e non c'è nulla che condizioni debounce
     , []);
 
     // imposta l'ordine di ordinamento in base alla colonna
@@ -63,6 +64,39 @@ function TaskList() {
         };
     }, [tasks, sortBy, sortOrder, searchQuery]);
 
+    // const [isInputValid, seIsInputValid] = useState(false);
+
+    // useEffect(() => {
+    //     const filteredTasks = tasks.filter(task => {
+    //         const title = task.title.toLowerCase();
+    //         const status = task.status.toLowerCase();
+    //         const date = new Date(task.createdAt).toLocaleDateString('it-IT', { day: '2-digit', month: '2-digit', year: 'numeric' });
+    //         const query = searchQuery.toLowerCase();
+    //         if(query) {
+    //             return title.includes(query) || status.includes(query) || date.includes(query);
+    //         } else {
+    //             return task;
+    //         };
+    //     });
+
+    //     seIsInputValid(filteredTasks);
+
+    //     if (sortBy === 'title') {
+    //         return [...isInputValid].sort((a, b) => sortOrder * a.title.localeCompare(b.title));
+    //     } else if (sortBy === 'status') {
+    //         return [...isInputValid].sort((a, b) => {
+    //             const statusOrder = {
+    //                 'To do': 1,
+    //                 'Doing': 2,
+    //                 'Done': 3
+    //             };
+    //             return sortOrder * (statusOrder[a.status] - statusOrder[b.status]);
+    //         });
+    //     } else {
+    //         return [...isInputValid].sort((a, b) => sortOrder * (new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()));
+    //     };
+    // }, [tasks, searchQuery, sortBy, sortOrder]);
+
     const handleToggleSelection = (taskId) => {
         // se l'array delle task selez include l'id della task che ho selezionato
         if(selectedTasks.includes(taskId)) {
@@ -91,6 +125,7 @@ function TaskList() {
                 <div className="container center search-area">
                     <input 
                         type="text"
+                        // non uso value (useState) perchè sennò debounce agisce al contrario
                         // uso handleSearch per prendere il valore inserito nella ricerca
                         onChange={(e) => handleSearch(e.target.value)}
                         placeholder="Cerca una task"

@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useGlobalContext } from "../context/GlobalContext";
 
 function AddTask() {
@@ -14,6 +14,13 @@ function AddTask() {
         return charValid;
     }, [title]);
 
+    // const [isTitleValid, setIsTitleValid] = useState(false);
+
+    // useEffect(() => {
+    //     const charCheck = title.split('').some((char) => symbols.includes(char));
+    //     setIsTitleValid(charCheck);
+    // }, [title]);
+
     const handleSubmit = async(e) => {
         e.preventDefault();
         if(!title || !descriptionRef || !statusRef) {
@@ -22,18 +29,18 @@ function AddTask() {
             const task = {
                 title: `${title}`,
                 description: `${descriptionRef.current.value}`,
-                status: `${statusRef.current.value}`
+                status: `${statusRef.current.value}` // .current rappresenta l'elemento html
             };
             try {
                 await addTask(task);
                 alert("Task aggiunto con successo!");
                 setTitle('');
-                descriptionRef.current.value = '';
+                descriptionRef.current.value = ''; 
                 statusRef.current.value = 'To do';
             } catch(error) {
                 console.error(error);
                 alert("Task non trovato!");
-            }
+            };
         };
     };
 
